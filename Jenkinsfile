@@ -26,6 +26,8 @@
             steps {
 			    kubectl apply -f deploy.yaml
                 kubectl apply -f ingress.yaml
+            }
+        }
 
 
         stage('Deploy to K8s') {
