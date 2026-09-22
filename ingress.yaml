@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: demo-app-ingress
+  name: demo-klusterapp-ingress
 spec:
   ingressClassName: traefik
   rules:
-  - host: demo.local
+  - host: demo.klusterapp.local
     http:
       paths:
       - path: /
