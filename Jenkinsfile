@@ -22,13 +22,16 @@
             }
         }
 
-        stage('Deploy Manifestfile') {
+        stage('Deploy using Manifestfile') {
             steps {
-			    kubectl apply -f deploy.yaml
-                kubectl apply -f ingress.yaml
-            }
-        }
-
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                    sh """
+                    kubectl apply -f deploy.yaml
+                    kubectl apply -f ingress.yaml
+					"""
+                     }
+    }
+}
 
         stage('Deploy to K8s') {
             steps {
