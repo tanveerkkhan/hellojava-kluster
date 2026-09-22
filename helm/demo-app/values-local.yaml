@@ -1,0 +1,9 @@
+image:
+  repository: khatanve/webapp-demo
+  tag: latest
+  pullPolicy: Always
+
+ingress:
+  className: traefik
+  annotations: {}
+  host: ""
