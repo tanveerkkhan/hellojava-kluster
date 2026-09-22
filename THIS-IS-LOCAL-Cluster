@@ -1,0 +1,37 @@
+ 1919  helm version
+ 1935  helm lint helm/demo-app
+ 1942  helm lint helm/demo-app
+ 2077  cd helm/
+ 2207  tree helm
+ 2208  helm create hellojava-kluster
+ 2215  helm upgrade --install demo-app hellojava-kluster/
+ 2216  helm install demo-app hellojava-kluster/
+ 2219  helm install demo-app hellojava-kluster/
+ 2220  helm upgrade --install demo-app hellojava-kluster/
+ 2221  helm install demo-app hellojava-kluster
+ 2223  helm install demo-app hellojava-kluster
+ 2224  helm upgrade --install demo-app hellojava-kluster/
+ 2239  helm uninstall demo-app
+ 2242  helm upgrade --install demo-app hellojava-kluster -f values.yaml
+ 2245  helm upgrade --install demo-app hellojava-kluster -f values.yaml
+ 2246  helm install demo-app hello-kluster
+ 2248  helm install demo-app hello-kluster
+ 2250  helm install demo-app hellojava-kluster
+ 2251  helm upgrade --install demo-app hellojava-kluster -f values.yaml
+ 2254  helm upgrade --install demo-app hellojava-kluster -f values.yaml
+ 2255  helm list
+ 2256  helm status demo-app
+ 2259  helm limit .
+ 2260  helm lint .
+ 2261  helm get values demo-app
+ 2262  helm get manifest demo-app
+ 2269  helm upgrade --install demo-app . -f values.yaml
+ 2274  helm get manifest demo-app
+ 2281  helm template demo-app .
+ 2282  helm upgrade --install demo-app .
+ 2287  git commit -m "added helm hellohava-kluster"
+ 2290  helm uninstall demo-app
+ 2332  rm -r helm 
+ 2361  history | grep helm
+ 2362  history | grep helm > THIS\ IS\ LOCAL\ Cluster 
+ 2364  history | grep helm > THIS-IS-LOCAL-Cluster 
