@@ -2,33 +2,33 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: javadep
-  name: javadep
+    app: klusteradep
+  name: klusterapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: javadep
+      app: klusterapp
   strategy: {}
   template:
     metadata:
       labels:
-        app: javadep
+        app: klusterapp
     spec:
       containers:
       - image: khatanve/webapp-demo
-        name: javadep
+        name: klusterapp
         resources: {}
 status: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: javadep-svc
+  name: klusterapp-svc
 spec:
   type: NodePort
   selector:
-    app: javadep
+    app: klusterapp
   ports:
   - port: 80
     targetPort: 8080

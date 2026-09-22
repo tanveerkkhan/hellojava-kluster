@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: demo-app-svc
+            name: klusterapp-svc
             port:
               number: 80
