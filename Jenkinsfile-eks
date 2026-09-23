@@ -1,0 +1,50 @@
+pipeline {
+    agent { label 'agent-1' }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/tanveerkkhan/hellojava-kluster.git'
+            }
+        }
+
+        stage('Docker Build & Push') {
+            steps {
+                dir('app') {
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'khatanve',
+                            usernameVariable: 'dockerusername',
+                            passwordVariable: 'dockerpass'
+                        )
+                    ]) {
+                        sh '''
+                            echo $dockerpass | docker login -u $dockerusername --password-stdin
+
+                            docker build -t khatanve/webapp-demo:${BUILD_NUMBER} .
+                            docker push khatanve/webapp-demo:${BUILD_NUMBER}
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to EKS') {
+            steps {
+                withCredentials([
+                    file(credentialsId: 'kubeconfig-eks', variable: 'KUBECONFIG')
+                ]) {
+                    sh '''
+                        kubectl get nodes
+
+                        helm upgrade --install demo-app ./hellojava-kluster \
+                          --set image.repository=khatanve/webapp-demo \
+                          --set image.tag=${BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
+    }
+}

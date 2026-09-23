@@ -1,0 +1,18 @@
+*.git
+*.terraform 
+*.terraform.lock.hcl
+
+
+# Java / Maven
+app/target/
+*.class
+
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.*
+*.pem
+
+# Docker
+*.tar

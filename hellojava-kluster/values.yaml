@@ -31,6 +31,12 @@ image:
 ingress:
   enabled: true
   path: /
-  className: traefik
-  annotations: {}
+  className: alb
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
   host: ""
+
+#Use below className based on cluster
+#className: alb for aws eks cluster
+#className: traefik for local k3s cluster
