@@ -40,3 +40,7 @@ ingress:
 #Use below className based on cluster
 #className: alb for aws eks cluster
 #className: traefik for local k3s cluster
+
+#tanveer@master:~/Desktop/MyAssignment$ kubectl get ingress
+#NAME            CLASS     HOSTS       ADDRESS                         PORTS   AGE
+#flask-ingress   traefik   hpe.local   192.***.25.**8,192.***.25.***   80      115d

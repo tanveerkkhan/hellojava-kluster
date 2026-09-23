@@ -1,6 +1,12 @@
 pipeline {
     agent { label 'agent-1' }
 
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_DEFAULT_REGION    = 'eu-central-1'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -37,14 +43,37 @@ pipeline {
                     file(credentialsId: 'kubeconfig-eks', variable: 'KUBECONFIG')
                 ]) {
                     sh '''
+                        echo "===== AWS Authentication ====="
+                        aws sts get-caller-identity
+
+                        echo "===== EKS Context ====="
+                        kubectl config current-context
+
+                        echo "===== Cluster Nodes ====="
                         kubectl get nodes
 
+                        echo "===== Deploying with Helm ====="
                         helm upgrade --install demo-app ./hellojava-kluster \
                           --set image.repository=khatanve/webapp-demo \
                           --set image.tag=${BUILD_NUMBER}
+
+                        echo "===== Verification ====="
+                        kubectl get pods
+                        kubectl get svc
+                        kubectl get ingress
                     '''
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Application successfully deployed to EKS'
+        }
+
+        failure {
+            echo 'Pipeline failed. Check the logs for details.'
         }
     }
 }
